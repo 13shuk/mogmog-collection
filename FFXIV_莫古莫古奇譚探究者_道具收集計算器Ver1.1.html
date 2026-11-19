@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>莫古莫古★大收集～奇譚探究者～ 道具收集計算器 Ver1.1</title>
+    <style>
+        :root {
+            --bg-page: #f0f2f8;
+            --bg-container: #ffffff;
+            --border-color: #cbd2e6;
+            --header-bg: linear-gradient(135deg, #6b52ae 0%, #8a70d6 100%);
+            --header-text: #ffffff;
+            --task-box-bg: #f8f7fc;
+            --task-box-border: #8a70d6;
+            --text-primary: #252236;
+            --text-secondary: #686280;
+            --btn-bg: #ebe7f8;
+            --btn-hover: #7b61c4;
+            --btn-text: #543d99;
+            --btn-hover-text: #ffffff;
+            --accent-score: #6b52ae;
+            --accent-ok: #2e7d32;
+            --accent-warn: #d84315;
+            --link-color: #6b52ae;
+            --shadow: 0 8px 28px rgba(72, 54, 128, 0.10);
+            --time-color: #6b52ae;
+            --sidebar-bg: #f8f7fc;
+            --sidebar-active: #6b52ae;
+            --sidebar-active-text: #ffffff;
+            --font-scale: 1;
+        }
+
+        body.dark-mode {
+            --bg-page: #13121a; --bg-container: #1d1b26; --border-color: #343045;
+            --header-bg: linear-gradient(135deg, #4b3882 0%, #684fb0 100%); --header-text: #f5f3ff;
+            --task-box-bg: #262333; --task-box-border: #7b61c4;
+            --text-primary: #f2f0fa; --text-secondary: #a29bb8;
+            --btn-bg: #2d293d; --btn-hover: #8a70d6; --btn-text: #d6ccff; --btn-hover-text: #ffffff;
+            --accent-score: #b39eff; --accent-ok: #69f0ae; --accent-warn: #ff8a65; --link-color: #b39eff;
+            --shadow: 0 10px 32px rgba(0,0,0,0.45);
+            --time-color: #b39eff; --sidebar-bg: #1a1824; --sidebar-active: #8a70d6; --sidebar-active-text: #ffffff;
+        }
+        body.cyber-mode {
+            --bg-page: #0a0e17; --bg-container: #111827; --border-color: #1e3a5f;
+            --header-bg: linear-gradient(135deg, #00f0ff 0%, #0080ff 50%, #7000ff 100%); --header-text: #0a0e17;
+            --task-box-bg: #0f172a; --task-box-border: #00f0ff;
+            --text-primary: #e0f2fe; --text-secondary: #7dd3fc;
+            --btn-bg: #0c4a6e; --btn-hover: #00f0ff; --btn-text: #67e8f9; --btn-hover-text: #0a0e17;
+            --accent-score: #00f0ff; --accent-ok: #00ff88; --accent-warn: #ff6b8b; --link-color: #00f0ff;
+            --shadow: 0 10px 32px rgba(0,240,255,0.15);
+            --time-color: #00f0ff; --sidebar-bg: #0b1220; --sidebar-active: #00f0ff; --sidebar-active-text: #0a0e17;
+        }
+        body.sakura-mode {
+            --bg-page: #fff5f7; --bg-container: #ffffff; --border-color: #f9c2d0;
+            --header-bg: linear-gradient(135deg, #ff85a2 0%, #ffb3c6 50%, #ffc2d1 100%); --header-text: #ffffff;
+            --task-box-bg: #fff0f3; --task-box-border: #ff85a2;
+            --text-primary: #5c2a3a; --text-secondary: #a85c6e;
+            --btn-bg: #ffe4ec; --btn-hover: #ff85a2; --btn-text: #d4506e; --btn-hover-text: #ffffff;
+            --accent-score: #e85a7a; --accent-ok: #2e7d32; --accent-warn: #d84315; --link-color: #e85a7a;
+            --shadow: 0 8px 28px rgba(255,133,162,0.18);
+            --time-color: #e85a7a; --sidebar-bg: #fff0f3; --sidebar-active: #ff85a2; --sidebar-active-text: #ffffff;
+        }
+        body.eva-mode {
+            --bg-page: #0d0f12; --bg-container: #15181e; --border-color: #2a2f3a;
+            --header-bg: linear-gradient(135deg, #6b2d8b 0%, #3d8b4a 50%, #8b2d6b 100%); --header-text: #e8f5e9;
+            --task-box-bg: #1a1e26; --task-box-border: #7b3fa0;
+            --text-primary: #e0e6ed; --text-secondary: #8fa0b3;
+            --btn-bg: #252a35; --btn-hover: #4caf50; --btn-text: #a5d6a7; --btn-hover-text: #0d0f12;
+            --accent-score: #69f0ae; --accent-ok: #69f0ae; --accent-warn: #ff8a65; --link-color: #ab47bc;
+            --shadow: 0 10px 32px rgba(107,45,139,0.25);
+            --time-color: #69f0ae; --sidebar-bg: #12151b; --sidebar-active: #7b3fa0; --sidebar-active-text: #e8f5e9;
+        }
+        body.nature-mode {
+            --bg-page: #f0f7f0; --bg-container: #ffffff; --border-color: #c8e0c8;
+            --header-bg: linear-gradient(135deg, #4caf50 0%, #81c784 50%, #a5d6a7 100%); --header-text: #ffffff;
+            --task-box-bg: #e8f5e9; --task-box-border: #66bb6a;
+            --text-primary: #1b3a1b; --text-secondary: #4a704a;
+            --btn-bg: #c8e6c9; --btn-hover: #43a047; --btn-text: #2e7d32; --btn-hover-text: #ffffff;
+            --accent-score: #2e7d32; --accent-ok: #1b5e20; --accent-warn: #d84315; --link-color: #388e3c;
+            --shadow: 0 8px 28px rgba(76,175,80,0.15);
+            --time-color: #2e7d32; --sidebar-bg: #e8f5e9; --sidebar-active: #4caf50; --sidebar-active-text: #ffffff;
+        }
+        body.vivid-mode {
+            --bg-page: #fff8e1; --bg-container: #ffffff; --border-color: #ffcc80;
+            --header-bg: linear-gradient(135deg, #ff5722 0%, #ff9800 50%, #ffc107 100%); --header-text: #ffffff;
+            --task-box-bg: #fff3e0; --task-box-border: #ff7043;
+            --text-primary: #3e2723; --text-secondary: #8d6e63;
+            --btn-bg: #ffe0b2; --btn-hover: #ff5722; --btn-text: #e64a19; --btn-hover-text: #ffffff;
+            --accent-score: #d84315; --accent-ok: #2e7d32; --accent-warn: #b71c1c; --link-color: #e65100;
+            --shadow: 0 8px 28px rgba(255,87,34,0.18);
+            --time-color: #d84315; --sidebar-bg: #fff3e0; --sidebar-active: #ff5722; --sidebar-active-text: #ffffff;
+        }
+        body.blackgray-mode {
+            --bg-page: #0c0c0c; --bg-container: #1a1a1a; --border-color: #333;
+            --header-bg: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%); --header-text: #e0e0e0;
+            --task-box-bg: #222; --task-box-border: #555;
+            --text-primary: #e8e8e8; --text-secondary: #999;
+            --btn-bg: #2a2a2a; --btn-hover: #555; --btn-text: #ccc; --btn-hover-text: #fff;
+            --accent-score: #b0b0b0; --accent-ok: #81c784; --accent-warn: #e57373; --link-color: #a0a0a0;
+            --shadow: 0 10px 32px rgba(0,0,0,0.5);
+            --time-color: #b0b0b0; --sidebar-bg: #141414; --sidebar-active: #444; --sidebar-active-text: #fff;
+        }
+        body.scarlet-mode {
+            --bg-page: #1a0a0f; --bg-container: #240f16; --border-color: #4a1c2a;
+            --header-bg: linear-gradient(135deg, #8b1a3a 0%, #c41e3a 50%, #e85a7a 100%); --header-text: #fff0f3;
+            --task-box-bg: #2e121c; --task-box-border: #c41e3a;
+            --text-primary: #fce4ec; --text-secondary: #e0a0b0;
+            --btn-bg: #3d1525; --btn-hover: #c41e3a; --btn-text: #f8bbd0; --btn-hover-text: #fff;
+            --accent-score: #ff6b8a; --accent-ok: #69f0ae; --accent-warn: #ffab91; --link-color: #ff6b8a;
+            --shadow: 0 10px 32px rgba(196,30,58,0.25);
+            --time-color: #ff6b8a; --sidebar-bg: #1e0c12; --sidebar-active: #c41e3a; --sidebar-active-text: #fff;
+        }
+        body.hacker-mode {
+            --bg-page: #000; --bg-container: #0a0f0a; --border-color: #0d3b0d;
+            --header-bg: linear-gradient(135deg, #003300 0%, #00aa00 50%, #00ff41 100%); --header-text: #000;
+            --task-box-bg: #0d1a0d; --task-box-border: #00ff41;
+            --text-primary: #00ff41; --text-secondary: #00aa33;
+            --btn-bg: #0a1f0a; --btn-hover: #00ff41; --btn-text: #00cc33; --btn-hover-text: #000;
+            --accent-score: #00ff41; --accent-ok: #00ff41; --accent-warn: #ff5252; --link-color: #00ff41;
+            --shadow: 0 10px 32px rgba(0,255,65,0.15);
+            --time-color: #00ff41; --sidebar-bg: #050a05; --sidebar-active: #00ff41; --sidebar-active-text: #000;
+        }
+        body.sunrise-mode {
+            --bg-page: #fff5eb; --bg-container: #ffffff; --border-color: #ffd4a8;
+            --header-bg: linear-gradient(135deg, #ff9a56 0%, #ff6b35 40%, #ff4757 100%); --header-text: #fff;
+            --task-box-bg: #fff0e0; --task-box-border: #ff9a56;
+            --text-primary: #4a2c1a; --text-secondary: #a06b4a;
+            --btn-bg: #ffe0c0; --btn-hover: #ff6b35; --btn-text: #d45a20; --btn-hover-text: #fff;
+            --accent-score: #e85d04; --accent-ok: #2e7d32; --accent-warn: #c62828; --link-color: #e85d04;
+            --shadow: 0 8px 28px rgba(255,107,53,0.18);
+            --time-color: #e85d04; --sidebar-bg: #fff0e0; --sidebar-active: #ff6b35; --sidebar-active-text: #fff;
+        }
+        body.cotton-mode {
+            --bg-page: #f5f0ff; --bg-container: #ffffff; --border-color: #e0d4f7;
+            --header-bg: linear-gradient(135deg, #c9b1ff 0%, #ffcce0 50%, #b8e0ff 100%); --header-text: #4a3a6b;
+            --task-box-bg: #f8f4ff; --task-box-border: #c9b1ff;
+            --text-primary: #3d2e5c; --text-secondary: #8a7aa8;
+            --btn-bg: #efe8ff; --btn-hover: #c9b1ff; --btn-text: #7b5ea7; --btn-hover-text: #fff;
+            --accent-score: #9b7ed9; --accent-ok: #2e7d32; --accent-warn: #d84315; --link-color: #9b7ed9;
+            --shadow: 0 8px 28px rgba(201,177,255,0.2);
+            --time-color: #9b7ed9; --sidebar-bg: #f8f4ff; --sidebar-active: #c9b1ff; --sidebar-active-text: #4a3a6b;
+        }
+        body.rainbow-mode {
+            --bg-page: #1a1025; --bg-container: #241833; --border-color: #4a3560;
+            --header-bg: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff); --header-text: #1a1025;
+            --task-box-bg: #2e2045; --task-box-border: #ff9ff3;
+            --text-primary: #f5e6ff; --text-secondary: #c9a0e8;
+            --btn-bg: #3d2a5c; --btn-hover: #ff9ff3; --btn-text: #e0b0ff; --btn-hover-text: #1a1025;
+            --accent-score: #48dbfb; --accent-ok: #69f0ae; --accent-warn: #ff8a65; --link-color: #ff9ff3;
+            --shadow: 0 10px 32px rgba(255,159,243,0.2);
+            --time-color: #48dbfb; --sidebar-bg: #1e1230; --sidebar-active: #ff9ff3; --sidebar-active-text: #1a1025;
+        }
+        body.forest-mode {
+            --bg-page: #0f1a12; --bg-container: #16241a; --border-color: #2a4a32;
+            --header-bg: linear-gradient(135deg, #1b4332 0%, #2d6a4f 40%, #40916c 100%); --header-text: #d8f3dc;
+            --task-box-bg: #1b2e22; --task-box-border: #40916c;
+            --text-primary: #d8f3dc; --text-secondary: #95d5b2;
+            --btn-bg: #243d2e; --btn-hover: #40916c; --btn-text: #95d5b2; --btn-hover-text: #0f1a12;
+            --accent-score: #74c69d; --accent-ok: #74c69d; --accent-warn: #ffab91; --link-color: #74c69d;
+            --shadow: 0 10px 32px rgba(64,145,108,0.2);
+            --time-color: #74c69d; --sidebar-bg: #121f16; --sidebar-active: #40916c; --sidebar-active-text: #d8f3dc;
+        }
+        body.minimal-mode {
+            --bg-page: #fafafa; --bg-container: #ffffff; --border-color: #e0e0e0;
+            --header-bg: linear-gradient(135deg, #424242 0%, #616161 100%); --header-text: #ffffff;
+            --task-box-bg: #f5f5f5; --task-box-border: #9e9e9e;
+            --text-primary: #212121; --text-secondary: #757575;
+            --btn-bg: #eeeeee; --btn-hover: #616161; --btn-text: #424242; --btn-hover-text: #ffffff;
+            --accent-score: #424242; --accent-ok: #2e7d32; --accent-warn: #c62828; --link-color: #616161;
+            --shadow: 0 4px 16px rgba(0,0,0,0.08);
+            --time-color: #616161; --sidebar-bg: #f5f5f5; --sidebar-active: #424242; --sidebar-active-text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang HK", "Microsoft JhengHei", sans-serif;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 16px 10px;
+            font-size: calc(15px * var(--font-scale));
+            overflow-x: hidden;
+        }
+
+        .app-layout {
+            display: flex;
+            width: 100%;
+            max-width: 1060px;
+            gap: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            background: var(--bg-container);
+            position: relative;
+        }
+
+        /* 左上角使用教學按鈕 */
+        .help-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 50;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .help-btn:hover {
+            background: var(--btn-hover);
+            color: var(--btn-hover-text);
+            border-color: var(--btn-hover);
+        }
+        .help-tooltip {
+            position: absolute;
+            top: 38px;
+            left: 0;
+            background: var(--bg-container);
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+            z-index: 60;
+        }
+        .help-btn:hover + .help-tooltip,
+        .help-btn:focus + .help-tooltip { opacity: 1; }
+
+        /* 右上角字體大小 */
+        .font-size-wrap {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--task-box-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 6px 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        .font-size-wrap span {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-right: 4px;
+        }
+        .font-btn {
+            min-width: 42px;
+            height: 40px;
+            padding: 0 8px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .font-btn:hover, .font-btn.active {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+        }
+
+        /* 側邊角色欄位 */
+        .sidebar {
+            width: 136px;
+            min-width: 136px;
+            background: var(--sidebar-bg);
+            border-right: 1.5px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 56px 0 14px;
+            gap: 5px;
+        }
+
+        .sidebar-title {
+            text-align: center;
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 800;
+            color: var(--text-secondary);
+            padding: 0 8px 10px;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed var(--border-color);
+            margin-bottom: 6px;
+        }
+
+        .person-tab {
+            margin: 0 8px;
+            padding: 9px 6px;
+            border-radius: 10px;
+            border: 1.5px solid transparent;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: calc(13px * var(--font-scale));
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.18s ease;
+            line-height: 1.25;
+            position: relative;
+        }
+        .person-tab:hover { border-color: var(--task-box-border); background: var(--task-box-bg); }
+        .person-tab.active {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            border-color: var(--sidebar-active);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+        }
+        .person-tab .tab-name { display: block; font-weight: 800; word-break: break-word; line-height: 1.2; }
+        .person-tab .tab-meta {
+            display: block;
+            font-size: calc(10px * var(--font-scale));
+            font-weight: 600;
+            opacity: 0.88;
+            margin-top: 3px;
+            line-height: 1.35;
+        }
+        .person-tab .edit-hint { position: absolute; top: 3px; right: 4px; font-size: 9px; opacity: 0.5; }
+        .person-tab:hover .edit-hint { opacity: 0.9; }
+
+        .rename-input {
+            width: 100%;
+            padding: 4px 6px;
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 700;
+            text-align: center;
+            border: 1.5px solid var(--task-box-border);
+            border-radius: 6px;
+            background: var(--bg-container);
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .main-wrapper {
+            flex: 1;
+            padding: 56px 24px 22px;
+            position: relative;
+            min-width: 0;
+        }
+
+        .title-banner {
+            width: 100%;
+            background: var(--header-bg);
+            color: var(--header-text);
+            text-align: center;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(107,82,174,0.22);
+        }
+        .title-main {
+            font-size: calc(20px * var(--font-scale));
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            word-break: break-word;
+        }
+        .title-sub {
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 600;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        /* 稀少神典石統計面板 */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .summary-card {
+            background: var(--task-box-bg);
+            border: 1.5px solid var(--task-box-border);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .summary-card-label {
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .summary-card-val {
+            font-size: calc(28px * var(--font-scale));
+            font-weight: 900;
+            color: var(--accent-score);
+            line-height: 1.1;
+        }
+        .summary-card-val.ok { color: var(--accent-ok); }
+        .summary-card-val.warn { color: var(--accent-warn); }
+
+        .owned-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 2px;
+        }
+        .owned-input {
+            width: 72px;
+            text-align: center;
+            font-size: calc(22px * var(--font-scale));
+            font-weight: 900;
+            color: var(--accent-score);
+            background: var(--bg-container);
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2px 4px;
+            outline: none;
+        }
+        .owned-input:focus { border-color: var(--task-box-border); }
+
+        .progress-wrap {
+            width: 100%;
+            height: 8px;
+            background: var(--btn-bg);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--header-bg);
+            transition: width 0.25s ease;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: calc(12.5px * var(--font-scale));
+        }
+        .total-update-time {
+            font-weight: 600;
+            color: var(--time-color);
+        }
+        .action-btns {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .mini-action-btn {
+            padding: 5px 10px;
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 700;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        .mini-action-btn:hover {
+            background: var(--btn-hover);
+            color: var(--btn-hover-text);
+            border-color: var(--btn-hover);
+        }
+
+        /* 篩選與搜尋區 */
+        .filter-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .filter-top-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 160px;
+            padding: 7px 12px;
+            border-radius: 9px;
+            border: 1.5px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--text-primary);
+            font-size: calc(13px * var(--font-scale));
+            outline: none;
+        }
+        .search-input:focus { border-color: var(--task-box-border); }
+
+        .toggle-selected-btn {
+            padding: 7px 12px;
+            border-radius: 9px;
+            border: 1.5px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--text-primary);
+            font-size: calc(12.5px * var(--font-scale));
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .toggle-selected-btn.active {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            border-color: var(--sidebar-active);
+        }
+
+        .cat-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .cat-btn {
+            padding: 5px 10px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--text-secondary);
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .cat-btn:hover { border-color: var(--task-box-border); color: var(--text-primary); }
+        .cat-btn.active {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            border-color: var(--sidebar-active);
+        }
+
+        /* 道具表格標題與列表 */
+        .grid-header {
+            display: grid;
+            grid-template-columns: 32px 1fr 64px 34px 44px 34px 62px;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 0 6px;
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .task-list { display: flex; flex-direction: column; gap: 8px; }
+
+        .task-row {
+            display: grid;
+            grid-template-columns: 32px 1fr 64px 34px 44px 34px 62px;
+            align-items: center;
+            gap: 4px;
+            padding: 6px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-color);
+            background: var(--bg-container);
+        }
+        .task-row.selected-row {
+            background: var(--task-box-bg);
+            border-color: var(--task-box-border);
+        }
+        .task-row.done-row {
+            opacity: 0.62;
+        }
+
+        .done-check {
+            width: 22px;
+            height: 22px;
+            margin: 0 auto;
+            border-radius: 6px;
+            border: 1.5px solid var(--border-color);
+            background: var(--task-box-bg);
+            color: var(--accent-ok);
+            font-size: 14px;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .done-check.checked {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            border-color: var(--sidebar-active);
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding: 2px 6px;
+            min-width: 0;
+        }
+        .item-name-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+        .item-name {
+            font-size: calc(13.5px * var(--font-scale));
+            font-weight: 700;
+            word-break: break-word;
+            cursor: pointer;
+        }
+        .item-name.line-through {
+            text-decoration: line-through;
+        }
+        .note-badge {
+            font-size: calc(10.5px * var(--font-scale));
+            font-weight: 800;
+            color: var(--accent-warn);
+            background: var(--btn-bg);
+            padding: 1px 5px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .cat-tag {
+            font-size: calc(10px * var(--font-scale));
+            color: var(--text-secondary);
+            background: var(--bg-container);
+            border: 1px solid var(--border-color);
+            padding: 1px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .unit-cost {
+            text-align: center;
+            font-size: calc(12.5px * var(--font-scale));
+            font-weight: 700;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .step-btn {
+            width: 30px; height: 30px;
+            margin: 0 auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        .step-btn:hover { background: var(--btn-hover); color: var(--btn-hover-text); border-color: var(--btn-hover); }
+        .step-btn:active { transform: scale(0.93); }
+
+        .count-display { text-align: center; font-size: calc(15px * var(--font-scale)); font-weight: 800; }
+        .count-input {
+            width: 44px;
+            text-align: center;
+            font-size: calc(15px * var(--font-scale));
+            font-weight: 800;
+            color: var(--text-primary);
+            background: var(--bg-container);
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2px 2px;
+            outline: none;
+            -moz-appearance: textfield;
+        }
+        .count-input::-webkit-outer-spin-button,
+        .count-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .count-input:focus { border-color: var(--task-box-border); }
+        .score-display { text-align: center; font-size: calc(15px * var(--font-scale)); font-weight: 900; color: var(--accent-score); }
+        .mobile-label { display: none; }
+
+        .empty-hint {
+            text-align: center;
+            padding: 28px 12px;
+            color: var(--text-secondary);
+            font-size: calc(14px * var(--font-scale));
+            border: 1.5px dashed var(--border-color);
+            border-radius: 12px;
+        }
+
+        /* 條件備註說明區 */
+        .notes-section {
+            margin-top: 18px;
+            padding: 12px 14px;
+            background: var(--task-box-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            font-size: calc(12px * var(--font-scale));
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        .notes-title {
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-size: calc(13px * var(--font-scale));
+        }
+        .notes-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px 14px;
+        }
+        .notes-list span {
+            color: var(--accent-warn);
+            font-weight: 800;
+            margin-right: 4px;
+        }
+
+        .footer-controls {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .credits-box {
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 12px;
+            background: var(--task-box-bg);
+            font-size: calc(12px * var(--font-scale));
+            line-height: 1.65;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 100%;
+            word-break: break-word;
+        }
+        .credits-box strong { color: var(--text-secondary); font-weight: 700; }
+        .credits-link {
+            color: var(--link-color);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1.5px solid transparent;
+        }
+        .credits-link:hover { border-bottom-color: var(--link-color); }
+
+        .theme-trigger-wrap { position: relative; }
+        .theme-trigger-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--task-box-bg);
+            color: var(--text-primary);
+            font-size: calc(13px * var(--font-scale));
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            user-select: none;
+        }
+        .theme-trigger-btn:hover { border-color: var(--task-box-border); }
+        .theme-trigger-btn .arrow { font-size: 11px; transition: transform 0.2s; }
+        .theme-trigger-btn.open .arrow { transform: rotate(180deg); }
+
+        .theme-dropdown {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            right: 0;
+            width: 200px;
+            max-height: 380px;
+            overflow-y: auto;
+            background: var(--bg-container);
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+            display: none;
+            z-index: 100;
+            animation: dropIn 0.18s ease-out;
+        }
+        .theme-dropdown.show { display: block; }
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .theme-dropdown-item {
+            padding: 9px 13px;
+            font-size: calc(12px * var(--font-scale));
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+        .theme-dropdown-item:last-child { border-bottom: none; }
+        .theme-dropdown-item:hover { background: var(--task-box-bg); }
+        .theme-dropdown-item.active {
+            background: var(--sidebar-active);
+            color: var(--sidebar-active-text);
+            font-weight: 800;
+        }
+        .theme-swatch {
+            width: 14px; height: 14px;
+            border-radius: 4px;
+            border: 1.5px solid rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+
+        /* 使用教學可移動視窗 */
+        .help-window {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 370px;
+            max-width: 92vw;
+            max-height: 72vh;
+            background: var(--bg-container);
+            border: 2px solid var(--task-box-border);
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+            z-index: 9000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .help-window.show { display: flex; }
+        .help-window-header {
+            background: var(--header-bg);
+            color: var(--header-text);
+            padding: 10px 14px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .help-window-close {
+            background: rgba(0,0,0,0.2);
+            border: none;
+            color: inherit;
+            width: 26px; height: 26px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .help-window-body {
+            padding: 14px 16px;
+            overflow-y: auto;
+            font-size: calc(13px * var(--font-scale));
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+        .help-window-body h4 {
+            margin: 12px 0 4px;
+            color: var(--accent-score);
+            font-size: calc(14px * var(--font-scale));
+        }
+        .help-window-body h4:first-child { margin-top: 0; }
+        .help-window-body ul { padding-left: 18px; margin: 0 0 6px; }
+        .help-window-body li { margin-bottom: 3px; }
+
+        /* ===== 桌面版極大字體模式 ===== */
+        @media (min-width: 761px) {
+            body.xl-font .sidebar { width: 165px; min-width: 165px; }
+            body.xl-font .summary-grid { grid-template-columns: 1fr; }
+            body.xl-font .grid-header { display: none; }
+            body.xl-font .task-row {
+                grid-template-columns: 44px 48px 1fr 48px;
+                grid-template-areas:
+                    "chk info info info"
+                    "cost minus count plus"
+                    "total total total total";
+                gap: 8px;
+                padding: 12px;
+            }
+            body.xl-font .done-check { grid-area: chk; width: 34px; height: 34px; font-size: 20px; }
+            body.xl-font .item-info { grid-area: info; }
+            body.xl-font .unit-cost { grid-area: cost; }
+            body.xl-font .step-minus { grid-area: minus; }
+            body.xl-font .count-display { grid-area: count; }
+            body.xl-font .step-plus { grid-area: plus; }
+            body.xl-font .score-display { grid-area: total; background: var(--task-box-bg); border-radius: 8px; padding: 6px; }
+            body.xl-font .mobile-label { display: inline; font-weight: 700; color: var(--text-secondary); margin-right: 4px; }
+            body.xl-font .step-btn { width: 42px; height: 42px; font-size: 22px; }
+            body.xl-font .notes-list { grid-template-columns: 1fr; }
+        }
+
+        /* ===== 手機版優化 ===== */
+        @media (max-width: 760px) {
+            body { padding: 8px 6px; }
+            .app-layout { flex-direction: column; max-width: 100%; border-radius: 14px; }
+            .help-btn { top: 8px; left: 8px; width: 26px; height: 26px; font-size: 13px; }
+            .font-size-wrap { top: 6px; right: 6px; padding: 5px 8px; gap: 4px; }
+            .font-size-wrap span { font-size: 15px; }
+            .font-btn { min-width: 36px; height: 34px; font-size: 17px; padding: 0 6px; }
+
+            .sidebar {
+                width: 100%;
+                min-width: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 52px 6px 10px;
+                border-right: none;
+                border-bottom: 1.5px solid var(--border-color);
+                gap: 5px;
+            }
+            .sidebar-title { width: 100%; border-bottom: none; margin-bottom: 2px; padding-bottom: 2px; }
+            .person-tab { margin: 0; padding: 7px 6px; min-width: 72px; font-size: calc(12px * var(--font-scale)); }
+            .person-tab .tab-meta { font-size: calc(9px * var(--font-scale)); }
+
+            .main-wrapper { padding: 14px 10px 16px; }
+            .title-main { font-size: calc(16px * var(--font-scale)); letter-spacing: 0.5px; }
+            .summary-grid { gap: 6px; }
+            .summary-card { padding: 8px 4px; }
+            .summary-card-val { font-size: calc(22px * var(--font-scale)); }
+            .owned-input { width: 52px; font-size: calc(17px * var(--font-scale)); }
+
+            .grid-header { display: none; }
+            .task-row {
+                display: grid;
+                grid-template-columns: 32px 1fr;
+                grid-template-areas:
+                    "chk info"
+                    "ctrl ctrl";
+                gap: 8px 6px;
+                padding: 10px 8px;
+            }
+            .done-check { grid-area: chk; width: 26px; height: 26px; }
+            .item-info { grid-area: info; padding: 0; }
+            .row-controls-mobile {
+                grid-area: ctrl;
+                display: grid;
+                grid-template-columns: 1fr 34px 44px 34px 1fr;
+                align-items: center;
+                gap: 4px;
+                padding-top: 6px;
+                border-top: 1px dashed var(--border-color);
+            }
+            .mobile-label { display: inline; font-size: calc(10.5px * var(--font-scale)); color: var(--text-secondary); margin-right: 2px; }
+            .notes-list { grid-template-columns: 1fr; }
+            .theme-dropdown { width: 185px; max-height: 280px; right: 0; }
+
+            /* 手機版：大字體（1.35x）與極大字體（2.2x）重排 */
+            body.lg-font .sidebar,
+            body.xl-font .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                padding: 54px 8px 12px;
+            }
+            body.lg-font .sidebar-title,
+            body.xl-font .sidebar-title { grid-column: 1 / -1; }
+            body.lg-font .person-tab,
+            body.xl-font .person-tab { min-width: 0; width: 100%; padding: 10px 6px; }
+            body.xl-font .person-tab:last-child { grid-column: 1 / -1; }
+
+            body.lg-font .summary-grid,
+            body.xl-font .summary-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            body.xl-font .owned-input { width: 96px; font-size: calc(20px * var(--font-scale)); }
+
+            body.lg-font .row-controls-mobile,
+            body.xl-font .row-controls-mobile {
+                grid-template-columns: 46px 1fr 46px;
+                grid-template-areas:
+                    "cost cost cost"
+                    "minus count plus"
+                    "total total total";
+                gap: 8px;
+            }
+            body.xl-font .row-controls-mobile {
+                grid-template-columns: 52px 1fr 52px;
+            }
+            body.lg-font .unit-cost,
+            body.xl-font .unit-cost { grid-area: cost; }
+            body.lg-font .step-minus,
+            body.xl-font .step-minus { grid-area: minus; }
+            body.lg-font .count-display,
+            body.xl-font .count-display { grid-area: count; font-size: calc(18px * var(--font-scale)); }
+            body.lg-font .count-input { width: 56px; font-size: calc(18px * var(--font-scale)); }
+            body.xl-font .count-input { width: 64px; font-size: calc(20px * var(--font-scale)); }
+            body.lg-font .step-plus,
+            body.xl-font .step-plus { grid-area: plus; }
+            body.lg-font .score-display,
+            body.xl-font .score-display {
+                grid-area: total;
+                background: var(--task-box-bg);
+                border-radius: 8px;
+                padding: 6px;
+                font-size: calc(16px * var(--font-scale));
+            }
+            body.lg-font .step-btn { width: 42px; height: 42px; font-size: 22px; }
+            body.xl-font .step-btn { width: 48px; height: 48px; font-size: 26px; }
+
+            body.xl-font .title-main { font-size: calc(13px * var(--font-scale)); line-height: 1.35; }
+            body.xl-font .footer-controls { flex-direction: column; align-items: stretch; }
+            body.xl-font .theme-trigger-wrap,
+            body.xl-font .theme-trigger-btn { width: 100%; justify-content: center; }
+            body.xl-font .theme-dropdown { width: 100%; left: 0; right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-layout">
+        <!-- 左上角使用教學 -->
+        <button class="help-btn" id="helpBtn" onclick="openHelp()" title="使用教學">?</button>
+        <div class="help-tooltip">使用教學</div>
+
+        <!-- 右上角字體大小 -->
+        <div class="font-size-wrap">
+            <span>字</span>
+            <button class="font-btn" data-scale="0.9" onclick="setFontSize(0.9)">小</button>
+            <button class="font-btn active" data-scale="1" onclick="setFontSize(1)">中</button>
+            <button class="font-btn" data-scale="1.35" onclick="setFontSize(1.35)">大</button>
+            <button class="font-btn" data-scale="2.2" onclick="setFontSize(2.2)" title="極大字體（適合老花／視力較弱）">♿</button>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-title">角色名稱</div>
+        </div>
+
+        <div class="main-wrapper">
+            <div class="title-banner">
+                <div class="title-main">莫古莫古★大收集～奇譚探究者～</div>
+                <div class="title-sub">稀少神典石 · 獎勵道具收集計算器</div>
+            </div>
+
+            <!-- 統計儀表板 -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-card-label">計劃兌換總需求</div>
+                    <div class="summary-card-val" id="totalNeeded">0</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-card-label">現有稀少神典石</div>
+                    <div class="owned-controls">
+                        <button class="step-btn" onclick="changeOwned(-1)">−</button>
+                        <input type="number" min="0" max="99999" class="owned-input" id="ownedInput" value="0" onchange="setOwned(this.value)" />
+                        <button class="step-btn" onclick="changeOwned(1)">+</button>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-card-label" id="remainLabel">尚欠神典石</div>
+                    <div class="summary-card-val warn" id="remainVal">0</div>
+                </div>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="status-bar">
+                <div class="total-update-time" id="totalUpdateTime">更新時間: --</div>
+                <div class="action-btns">
+                    <button class="mini-action-btn" onclick="selectAllOnce()">全選各1件</button>
+                    <button class="mini-action-btn" onclick="resetCurrentPerson()">清空目前角色</button>
+                </div>
+            </div>
+
+            <!-- 搜尋與分類篩選 -->
+            <div class="filter-panel">
+                <div class="filter-top-row">
+                    <input type="text" class="search-input" id="searchInput" placeholder="搜尋道具名稱或所需數量（例如：魔笛、15、※1）..." oninput="renderItems()" />
+                    <button class="toggle-selected-btn" id="onlySelectedBtn" onclick="toggleOnlySelected()">只看已選 (0)</button>
+                </div>
+                <div class="cat-tabs" id="catTabs"></div>
+            </div>
+
+            <div class="grid-header">
+                <div>已換</div>
+                <div>可兌換道具</div>
+                <div>單價</div>
+                <div></div>
+                <div>數量</div>
+                <div></div>
+                <div>小計</div>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+
+            <!-- 兌換前置條件備註 -->
+            <div class="notes-section">
+                <div class="notes-title">兌換前置條件說明</div>
+                <ul class="notes-list">
+                    <li><span>※1</span>完成任務「超越幻想，究極武器」後才可兌換。</li>
+                    <li><span>※2</span>完成任務「決鬥！九宮幻卡」後才可兌換。</li>
+                    <li><span>※3</span>完成任務「女商人的陷阱」後才可兌換。</li>
+                    <li><span>※4</span>完成任務「潛入更深處」後才可兌換。</li>
+                    <li><span>※5</span>完成任務「博茲雅堡壘蒸發事件」後才可兌換。</li>
+                    <li><span>※6</span>完成任務「敵人現身」後才可兌換。</li>
+                </ul>
+            </div>
+
+            <div class="footer-controls">
+                <div class="credits-box">
+                    <div><strong>製作者:</strong> Th1rTe3n叔</div>
+                    <div><strong>Threads:</strong> <a class="credits-link" href="https://www.threads.com/@_13.shuk" target="_blank" rel="noopener noreferrer">_13.shuk</a></div>
+                    <div><strong>Discord:</strong> im13_</div>
+                </div>
+
+                <div class="theme-trigger-wrap">
+                    <button class="theme-trigger-btn" id="themeTrigger" onclick="toggleThemeDropdown(event)">
+                        <span id="currentThemeLabel">光明</span>
+                        <span class="arrow">▲</span>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <div class="theme-dropdown-item" data-theme="light" onclick="selectTheme('light')"><span class="theme-swatch" style="background:linear-gradient(135deg,#6b52ae,#8a70d6)"></span>光明</div>
+                        <div class="theme-dropdown-item" data-theme="dark" onclick="selectTheme('dark')"><span class="theme-swatch" style="background:linear-gradient(135deg,#4b3882,#684fb0)"></span>暗黑</div>
+                        <div class="theme-dropdown-item" data-theme="cyber" onclick="selectTheme('cyber')"><span class="theme-swatch" style="background:linear-gradient(135deg,#00f0ff,#7000ff)"></span>賽博</div>
+                        <div class="theme-dropdown-item" data-theme="sakura" onclick="selectTheme('sakura')"><span class="theme-swatch" style="background:linear-gradient(135deg,#ff85a2,#ffc2d1)"></span>櫻花粉</div>
+                        <div class="theme-dropdown-item" data-theme="eva" onclick="selectTheme('eva')"><span class="theme-swatch" style="background:linear-gradient(135deg,#6b2d8b,#3d8b4a)"></span>EVA-初號機</div>
+                        <div class="theme-dropdown-item" data-theme="nature" onclick="selectTheme('nature')"><span class="theme-swatch" style="background:linear-gradient(135deg,#4caf50,#a5d6a7)"></span>自然健康</div>
+                        <div class="theme-dropdown-item" data-theme="vivid" onclick="selectTheme('vivid')"><span class="theme-swatch" style="background:linear-gradient(135deg,#ff5722,#ffc107)"></span>活潑高對比</div>
+                        <div class="theme-dropdown-item" data-theme="blackgray" onclick="selectTheme('blackgray')"><span class="theme-swatch" style="background:linear-gradient(135deg,#1a1a1a,#555)"></span>主黑次灰</div>
+                        <div class="theme-dropdown-item" data-theme="scarlet" onclick="selectTheme('scarlet')"><span class="theme-swatch" style="background:linear-gradient(135deg,#8b1a3a,#c41e3a)"></span>緋月</div>
+                        <div class="theme-dropdown-item" data-theme="hacker" onclick="selectTheme('hacker')"><span class="theme-swatch" style="background:linear-gradient(135deg,#003300,#00ff41)"></span>黑客</div>
+                        <div class="theme-dropdown-item" data-theme="sunrise" onclick="selectTheme('sunrise')"><span class="theme-swatch" style="background:linear-gradient(135deg,#ff9a56,#ff4757)"></span>日出</div>
+                        <div class="theme-dropdown-item" data-theme="cotton" onclick="selectTheme('cotton')"><span class="theme-swatch" style="background:linear-gradient(135deg,#c9b1ff,#ffcce0)"></span>棉花糖</div>
+                        <div class="theme-dropdown-item" data-theme="rainbow" onclick="selectTheme('rainbow')"><span class="theme-swatch" style="background:linear-gradient(90deg,#ff6b6b,#feca57,#48dbfb,#ff9ff3)"></span>彩虹</div>
+                        <div class="theme-dropdown-item" data-theme="forest" onclick="selectTheme('forest')"><span class="theme-swatch" style="background:linear-gradient(135deg,#1b4332,#40916c)"></span>森林</div>
+                        <div class="theme-dropdown-item" data-theme="minimal" onclick="selectTheme('minimal')"><span class="theme-swatch" style="background:linear-gradient(135deg,#424242,#9e9e9e)"></span>極簡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 使用教學視窗 -->
+    <div class="help-window" id="helpWindow">
+        <div class="help-window-header" id="helpDragBar">
+            <span>使用教學</span>
+            <button class="help-window-close" onclick="closeHelp()">×</button>
+        </div>
+        <div class="help-window-body">
+            <h4>💎 神典石計算方式</h4>
+            <ul>
+                <li>按各道具所需「稀少神典石」數量，調整目標兌換數量（− / +）</li>
+                <li>亦可直接點擊道具名稱快速切換 0 / 1 件</li>
+                <li>上方會自動統計「計劃兌換總需求」與「尚欠神典石」</li>
+                <li>勾選左側「已換」方格可標記已完成兌換（仍保留在需求統計中，方便對數）</li>
+            </ul>
+            <h4>🔍 搜尋與分類</h4>
+            <ul>
+                <li>支援按分類篩選：全部、坐騎與寵物、外觀與樂譜、裝備防具、家具擺飾、地圖與幻卡、其他</li>
+                <li>可按「只看已選」快速檢視購物車清單</li>
+            </ul>
+            <h4>👤 多角色記錄</h4>
+            <ul>
+                <li>左側有 5 個角色分頁，資料完全獨立儲存</li>
+                <li>點 ✎、雙擊名稱（手機長按）可重新命名</li>
+            </ul>
+            <h4>🎨 介面與字體</h4>
+            <ul>
+                <li>右下角可切換 15 種介面風格，右上角支援小 / 中 / 大 / ♿極大字體</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const PERSON_COUNT = 5;
+        const DEFAULT_NAMES = ["正身", "分身1", "分身2", "分身3", "分身4"];
+
+        const THEME_LABELS = {
+            light: "光明", dark: "暗黑", cyber: "賽博", sakura: "櫻花粉",
+            eva: "EVA-初號機", nature: "自然健康", vivid: "活潑高對比",
+            blackgray: "主黑次灰", scarlet: "緋月", hacker: "黑客",
+            sunrise: "日出", cotton: "棉花糖", rainbow: "彩虹",
+            forest: "森林", minimal: "極簡"
+        };
+
+        const THEME_CLASSES = {
+            light: "", dark: "dark-mode", cyber: "cyber-mode", sakura: "sakura-mode",
+            eva: "eva-mode", nature: "nature-mode", vivid: "vivid-mode",
+            blackgray: "blackgray-mode", scarlet: "scarlet-mode", hacker: "hacker-mode",
+            sunrise: "sunrise-mode", cotton: "cotton-mode", rainbow: "rainbow-mode",
+            forest: "forest-mode", minimal: "minimal-mode"
+        };
+
+        const CATEGORIES = ["全部", "坐騎與寵物", "外觀與樂譜", "裝備防具", "家具擺飾", "地圖與幻卡", "其他"];
+
+        const REWARD_CATALOG = [
+            { id: "cup_earring", name: "咖啡杯耳墜", cost: 100, cat: "外觀與樂譜", note: "" },
+            { id: "orch_oblivion", name: "管弦樂琴樂譜：忘卻的此岸", cost: 100, cat: "外觀與樂譜", note: "" },
+            { id: "demon_earring", name: "惡魔磚塊耳墜", cost: 50, cat: "外觀與樂譜", note: "" },
+            { id: "ruby_gwiber", name: "紅寶石玲龍魔笛", cost: 50, cat: "坐騎與寵物", note: "" },
+            { id: "frog_m", name: "青蛙號M啟動鑰匙", cost: 50, cat: "坐騎與寵物", note: "" },
+            { id: "hair_gyr", name: "髮型樣式：基拉巴尼亞編髮", cost: 50, cat: "外觀與樂譜", note: "" },
+            { id: "phantom_necro", name: "幻影亡靈法師", cost: 50, cat: "坐騎與寵物", note: "" },
+            { id: "barding_mch", name: "機工士裝甲", cost: 30, cat: "坐騎與寵物", note: "" },
+            { id: "emote_cheer", name: "演技教材・振作精神", cost: 30, cat: "外觀與樂譜", note: "" },
+            { id: "parasol_dot", name: "田園圓點陽傘", cost: 30, cat: "外觀與樂譜", note: "" },
+            { id: "mgp_plat", name: "金碟幣白金卡", cost: 30, cat: "其他", note: "" },
+            { id: "drake_horn", name: "火蛟角笛", cost: 30, cat: "坐騎與寵物", note: "" },
+            { id: "direwolf_horn", name: "恐狼角笛", cost: 30, cat: "坐騎與寵物", note: "" },
+            { id: "revel_kamuy", name: "狂歡神威魔笛", cost: 30, cat: "坐騎與寵物", note: "" },
+            { id: "bliss_kamuy", name: "極樂神威魔笛", cost: 30, cat: "坐騎與寵物", note: "" },
+            { id: "wood_trash", name: "木製垃圾桶", cost: 20, cat: "家具擺飾", note: "" },
+            { id: "ilmheg_fountain", name: "伊爾美格花園噴泉", cost: 20, cat: "家具擺飾", note: "" },
+            { id: "swing_chair", name: "鞦韆椅", cost: 20, cat: "家具擺飾", note: "" },
+            { id: "walnut_vase", name: "胡桃木立架花瓶", cost: 20, cat: "家具擺飾", note: "" },
+            { id: "poroggo_orn", name: "庭院智蛙擺飾", cost: 20, cat: "家具擺飾", note: "" },
+            { id: "kobold_doll", name: "地靈娃娃", cost: 15, cat: "家具擺飾", note: "" },
+            { id: "ish_fending_top", name: "伊修加爾德新型禦敵上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_fending_bot", name: "伊修加爾德新型禦敵下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_maiming_top", name: "伊修加爾德新型制敵上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_maiming_bot", name: "伊修加爾德新型制敵下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_striking_top", name: "伊修加爾德新型強襲上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_striking_bot", name: "伊修加爾德新型強襲下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_scouting_top", name: "伊修加爾德新型游擊上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_scouting_bot", name: "伊修加爾德新型游擊下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_aiming_top", name: "伊修加爾德新型精準上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_aiming_bot", name: "伊修加爾德新型精準下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_healing_top", name: "伊修加爾德新型治癒上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_healing_bot", name: "伊修加爾德新型治癒下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_casting_top", name: "伊修加爾德新型詠咒上衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "ish_casting_bot", name: "伊修加爾德新型詠咒下身", cost: 15, cat: "裝備防具", note: "" },
+            { id: "moonfire_m_top", name: "月火男式坎肩", cost: 15, cat: "裝備防具", note: "" },
+            { id: "moonfire_m_bot", name: "月火男式短褲", cost: 15, cat: "裝備防具", note: "" },
+            { id: "moonfire_f_top", name: "月火女式夏衣", cost: 15, cat: "裝備防具", note: "" },
+            { id: "moonfire_f_bot", name: "月火女式夏褲", cost: 15, cat: "裝備防具", note: "" },
+            { id: "map_s1", name: "陳舊的地圖S1", cost: 15, cat: "地圖與幻卡", note: "" },
+            { id: "map_s2", name: "陳舊的地圖S2", cost: 15, cat: "地圖與幻卡", note: "" },
+            { id: "map_s3", name: "陳舊的地圖S3", cost: 15, cat: "地圖與幻卡", note: "" },
+            { id: "map_s4", name: "陳舊的地圖S4", cost: 15, cat: "地圖與幻卡", note: "" },
+            { id: "det_w_than", name: "西薩納蘭詳細地圖", cost: 10, cat: "地圖與幻卡", note: "※1" },
+            { id: "det_c_than", name: "中薩納蘭詳細地圖", cost: 10, cat: "地圖與幻卡", note: "※1" },
+            { id: "det_e_than", name: "東薩納蘭詳細地圖", cost: 10, cat: "地圖與幻卡", note: "※1" },
+            { id: "det_s_than", name: "南薩納蘭詳細地圖", cost: 10, cat: "地圖與幻卡", note: "※1" },
+            { id: "det_n_than", name: "北薩納蘭詳細地圖", cost: 10, cat: "地圖與幻卡", note: "※1" },
+            { id: "card_lolorito", name: "九宮幻卡：羅羅力特・納納力特", cost: 10, cat: "地圖與幻卡", note: "※2" },
+            { id: "card_gibrillont", name: "九宮幻卡：吉布里隆", cost: 10, cat: "地圖與幻卡", note: "※3" },
+            { id: "card_unknown", name: "九宮幻卡：不明物體", cost: 7, cat: "地圖與幻卡", note: "※4" },
+            { id: "card_varis", name: "九宮幻卡：瓦厲斯・耶・加爾烏斯", cost: 7, cat: "地圖與幻卡", note: "※5" },
+            { id: "card_2b", name: "九宮幻卡：2B", cost: 7, cat: "地圖與幻卡", note: "※6" },
+            { id: "minion_tiger", name: "虎斑次郎", cost: 7, cat: "坐騎與寵物", note: "" },
+            { id: "orch_world", name: "管弦樂琴樂譜：走向世界", cost: 7, cat: "外觀與樂譜", note: "" },
+            { id: "chocobo_earring", name: "巧兒鳥耳墜", cost: 1, cat: "外觀與樂譜", note: "" },
+            { id: "taoist_moogle", name: "道士莫古利娃娃", cost: 1, cat: "家具擺飾", note: "" },
+            { id: "magicked_prism", name: "魔法棱晶（職業大師）×10", cost: 1, cat: "其他", note: "" }
+        ];
+
+        const STORAGE_KEY = "ffxiv_mogmog_allegory_v1";
+        let currentPerson = 0;
+        let personsData = [];
+        let personNames = [...DEFAULT_NAMES];
+        let renamingIdx = -1;
+        let activeCat = "全部";
+        let onlySelected = false;
+
+        function createEmptyPerson() {
+            return {
+                counts: {},
+                done: {},
+                owned: 0,
+                lastUpdate: null
+            };
+        }
+
+        function loadAllData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    personsData = parsed.persons || [];
+                    personNames = parsed.names || [...DEFAULT_NAMES];
+                    while (personsData.length < PERSON_COUNT) personsData.push(createEmptyPerson());
+                    while (personNames.length < PERSON_COUNT) personNames.push(DEFAULT_NAMES[personNames.length] || `分身${personNames.length}`);
+                    personsData.forEach(p => {
+                        if (!p.counts) p.counts = {};
+                        if (!p.done) p.done = {};
+                        if (typeof p.owned !== "number") p.owned = 0;
+                    });
+                } else {
+                    personsData = Array.from({ length: PERSON_COUNT }, () => createEmptyPerson());
+                    personNames = [...DEFAULT_NAMES];
+                }
+            } catch (e) {
+                personsData = Array.from({ length: PERSON_COUNT }, () => createEmptyPerson());
+                personNames = [...DEFAULT_NAMES];
+            }
+        }
+
+        function saveAllData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                names: personNames,
+                persons: personsData
+            }));
+        }
+
+        function getCurrent() { return personsData[currentPerson]; }
+
+        function formatDateTime(isoStr) {
+            if (!isoStr) return "--";
+            const date = new Date(isoStr);
+            if (isNaN(date.getTime())) return "--";
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, "0");
+            const d = String(date.getDate()).padStart(2, "0");
+            const h = String(date.getHours()).padStart(2, "0");
+            const min = String(date.getMinutes()).padStart(2, "0");
+            const s = String(date.getSeconds()).padStart(2, "0");
+            return `${y}/${m}/${d} ${h}:${min}:${s}`;
+        }
+
+        function calcPersonNeeded(p) {
+            let total = 0;
+            REWARD_CATALOG.forEach(item => {
+                // 已勾選「已換」的項目不計入總需求
+                if (p.done[item.id]) return;
+                const cnt = p.counts[item.id] || 0;
+                total += cnt * item.cost;
+            });
+            return total;
+        }
+
+        function calcPersonSelectedCount(p) {
+            let count = 0;
+            REWARD_CATALOG.forEach(item => {
+                if ((p.counts[item.id] || 0) > 0) count++;
+            });
+            return count;
+        }
+
+        function renderSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.innerHTML = "";
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "sidebar-title";
+            titleDiv.textContent = "角色名稱";
+            sidebar.appendChild(titleDiv);
+
+            for (let i = 0; i < PERSON_COUNT; i++) {
+                const needed = calcPersonNeeded(personsData[i]);
+                const selCnt = calcPersonSelectedCount(personsData[i]);
+                const tab = document.createElement("div");
+                tab.className = "person-tab" + (i === currentPerson ? " active" : "");
+
+                if (renamingIdx === i) {
+                    const input = document.createElement("input");
+                    input.className = "rename-input";
+                    input.id = "renameInput";
+                    input.maxLength = 10;
+                    input.value = personNames[i];
+                    tab.appendChild(input);
+                    sidebar.appendChild(tab);
+                    input.focus();
+                    input.select();
+                    input.onblur = () => finishRename(i, input.value);
+                    input.onkeydown = (e) => {
+                        if (e.key === "Enter") { e.preventDefault(); input.blur(); }
+                        else if (e.key === "Escape") { renamingIdx = -1; renderSidebar(); }
+                    };
+                } else {
+                    const nameSpan = document.createElement("span");
+                    nameSpan.className = "tab-name";
+                    nameSpan.textContent = personNames[i];
+
+                    const metaSpan = document.createElement("span");
+                    metaSpan.className = "tab-meta";
+                    metaSpan.textContent = `${needed} 粒 · ${selCnt} 項`;
+
+                    const editHint = document.createElement("span");
+                    editHint.className = "edit-hint";
+                    editHint.textContent = "✎";
+
+                    tab.appendChild(nameSpan);
+                    tab.appendChild(metaSpan);
+                    tab.appendChild(editHint);
+
+                    tab.onclick = (e) => {
+                        if (e.target.classList.contains("edit-hint") || e.detail === 2) { startRename(i); return; }
+                        switchPerson(i);
+                    };
+                    let pressTimer;
+                    tab.addEventListener("touchstart", () => { pressTimer = setTimeout(() => startRename(i), 600); }, { passive: true });
+                    tab.addEventListener("touchend", () => clearTimeout(pressTimer));
+                    tab.addEventListener("touchmove", () => clearTimeout(pressTimer));
+                    sidebar.appendChild(tab);
+                }
+            }
+        }
+
+        function startRename(idx) { renamingIdx = idx; renderSidebar(); }
+        function finishRename(idx, newName) {
+            personNames[idx] = (newName || "").trim().slice(0, 10) || DEFAULT_NAMES[idx];
+            renamingIdx = -1;
+            saveAllData();
+            renderSidebar();
+        }
+
+        function renderCatTabs() {
+            const wrap = document.getElementById("catTabs");
+            wrap.innerHTML = "";
+            CATEGORIES.forEach(cat => {
+                const btn = document.createElement("button");
+                btn.className = "cat-btn" + (activeCat === cat ? " active" : "");
+                btn.textContent = cat;
+                btn.onclick = () => {
+                    activeCat = cat;
+                    renderCatTabs();
+                    renderItems();
+                };
+                wrap.appendChild(btn);
+            });
+        }
+
+        function toggleOnlySelected() {
+            onlySelected = !onlySelected;
+            renderSummary();
+            renderItems();
+        }
+
+        function renderSummary() {
+            const p = getCurrent();
+            const needed = calcPersonNeeded(p);
+            const owned = p.owned || 0;
+            const remain = Math.max(0, needed - owned);
+            const surplus = Math.max(0, owned - needed);
+            const selCnt = calcPersonSelectedCount(p);
+
+            document.getElementById("totalNeeded").textContent = needed;
+            document.getElementById("ownedInput").value = owned;
+
+            const remainLabel = document.getElementById("remainLabel");
+            const remainVal = document.getElementById("remainVal");
+            if (needed === 0) {
+                remainLabel.textContent = "尚欠神典石";
+                remainVal.textContent = "0";
+                remainVal.className = "summary-card-val";
+            } else if (remain > 0) {
+                remainLabel.textContent = "尚欠神典石";
+                remainVal.textContent = remain;
+                remainVal.className = "summary-card-val warn";
+            } else {
+                remainLabel.textContent = surplus > 0 ? `已達標（多出 ${surplus}）` : "已達標！";
+                remainVal.textContent = "0";
+                remainVal.className = "summary-card-val ok";
+            }
+
+            const pct = needed === 0 ? 0 : Math.min(100, Math.round((owned / needed) * 100));
+            document.getElementById("progressBar").style.width = pct + "%";
+
+            document.getElementById("totalUpdateTime").textContent = "更新時間: " + formatDateTime(p.lastUpdate);
+
+            const selBtn = document.getElementById("onlySelectedBtn");
+            selBtn.textContent = `只看已選 (${selCnt})`;
+            selBtn.classList.toggle("active", onlySelected);
+        }
+
+        function renderItems() {
+            const p = getCurrent();
+            const container = document.getElementById("taskList");
+            container.innerHTML = "";
+            const kw = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+
+            const filtered = REWARD_CATALOG.filter(item => {
+                const cnt = p.counts[item.id] || 0;
+                if (onlySelected && cnt === 0) return false;
+                if (activeCat !== "全部" && item.cat !== activeCat) return false;
+                if (kw) {
+                    const hay = `${item.name} ${item.cost}個 ${item.note} ${item.cat}`.toLowerCase();
+                    if (!hay.includes(kw)) return false;
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                const empty = document.createElement("div");
+                empty.className = "empty-hint";
+                empty.textContent = "搵唔到符合條件嘅獎勵道具，試下清除搜尋或切換分類。";
+                container.appendChild(empty);
+                return;
+            }
+
+            const isMobile = window.innerWidth <= 760;
+
+            filtered.forEach(item => {
+                const cnt = p.counts[item.id] || 0;
+                const isDone = !!p.done[item.id];
+                const subTotal = cnt * item.cost;
+
+                const row = document.createElement("div");
+                row.className = "task-row" + (cnt > 0 ? " selected-row" : "") + (isDone ? " done-row" : "");
+
+                const chkBtn = document.createElement("button");
+                chkBtn.className = "done-check" + (isDone ? " checked" : "");
+                chkBtn.textContent = isDone ? "✓" : "";
+                chkBtn.title = "標記已兌換完成";
+                chkBtn.onclick = () => toggleDone(item.id);
+
+                const infoDiv = document.createElement("div");
+                infoDiv.className = "item-info";
+
+                const nameWrap = document.createElement("div");
+                nameWrap.className = "item-name-wrap";
+
+                const nameSpan = document.createElement("span");
+                nameSpan.className = "item-name" + (isDone ? " line-through" : "");
+                nameSpan.textContent = item.name;
+                nameSpan.onclick = () => quickToggleItem(item.id);
+                nameWrap.appendChild(nameSpan);
+
+                if (item.note) {
+                    const noteSpan = document.createElement("span");
+                    noteSpan.className = "note-badge";
+                    noteSpan.textContent = item.note;
+                    nameWrap.appendChild(noteSpan);
+                }
+
+                const catSpan = document.createElement("span");
+                catSpan.className = "cat-tag";
+                catSpan.textContent = item.cat;
+
+                infoDiv.appendChild(nameWrap);
+                infoDiv.appendChild(catSpan);
+
+                const costDiv = document.createElement("div");
+                costDiv.className = "unit-cost";
+                const costLbl = document.createElement("span");
+                costLbl.className = "mobile-label";
+                costLbl.textContent = "單價:";
+                costDiv.appendChild(costLbl);
+                costDiv.appendChild(document.createTextNode(`${item.cost} 個`));
+
+                const minusBtn = document.createElement("button");
+                minusBtn.className = "step-btn step-minus";
+                minusBtn.textContent = "−";
+                minusBtn.onclick = () => changeItemCount(item.id, -1);
+
+                const countDiv = document.createElement("div");
+                countDiv.className = "count-display";
+                const cntLbl = document.createElement("span");
+                cntLbl.className = "mobile-label";
+                cntLbl.textContent = "數量:";
+                countDiv.appendChild(cntLbl);
+                const countInput = document.createElement("input");
+                countInput.type = "number";
+                countInput.min = "0";
+                countInput.max = "9999";
+                countInput.className = "count-input";
+                countInput.value = String(cnt);
+                countInput.onchange = () => setItemCount(item.id, countInput.value);
+                countInput.onkeydown = (e) => {
+                    if (e.key === "Enter") { e.preventDefault(); countInput.blur(); }
+                };
+                // 防止滾輪改數字時失焦後意外觸發
+                countInput.onwheel = (e) => e.target.blur();
+                countDiv.appendChild(countInput);
+
+                const plusBtn = document.createElement("button");
+                plusBtn.className = "step-btn step-plus";
+                plusBtn.textContent = "+";
+                plusBtn.onclick = () => changeItemCount(item.id, 1);
+
+                const scoreDiv = document.createElement("div");
+                scoreDiv.className = "score-display";
+                const subLbl = document.createElement("span");
+                subLbl.className = "mobile-label";
+                subLbl.textContent = "小計:";
+                scoreDiv.appendChild(subLbl);
+                scoreDiv.appendChild(document.createTextNode(String(subTotal)));
+
+                row.appendChild(chkBtn);
+                row.appendChild(infoDiv);
+
+                if (isMobile) {
+                    const ctrlWrap = document.createElement("div");
+                    ctrlWrap.className = "row-controls-mobile";
+                    ctrlWrap.appendChild(costDiv);
+                    ctrlWrap.appendChild(minusBtn);
+                    ctrlWrap.appendChild(countDiv);
+                    ctrlWrap.appendChild(plusBtn);
+                    ctrlWrap.appendChild(scoreDiv);
+                    row.appendChild(ctrlWrap);
+                } else {
+                    row.appendChild(costDiv);
+                    row.appendChild(minusBtn);
+                    row.appendChild(countDiv);
+                    row.appendChild(plusBtn);
+                    row.appendChild(scoreDiv);
+                }
+
+                container.appendChild(row);
+            });
+        }
+
+        function renderAll() {
+            renderSidebar();
+            renderCatTabs();
+            renderSummary();
+            renderItems();
+        }
+
+        function switchPerson(idx) {
+            if (idx === currentPerson || renamingIdx !== -1) return;
+            currentPerson = idx;
+            localStorage.setItem("ffxiv_mogmog_cur_person", currentPerson);
+            renderAll();
+        }
+
+        function changeItemCount(id, delta) {
+            const p = getCurrent();
+            const cur = p.counts[id] || 0;
+            const next = Math.max(0, cur + delta);
+            if (next === 0) delete p.counts[id];
+            else p.counts[id] = next;
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSidebar();
+            renderSummary();
+            renderItems();
+        }
+
+        function setItemCount(id, val) {
+            const p = getCurrent();
+            const n = parseInt(val, 10);
+            const next = isNaN(n) || n < 0 ? 0 : Math.min(9999, n);
+            if (next === 0) delete p.counts[id];
+            else p.counts[id] = next;
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSidebar();
+            renderSummary();
+            renderItems();
+        }
+
+        function quickToggleItem(id) {
+            const p = getCurrent();
+            const cur = p.counts[id] || 0;
+            if (cur > 0) delete p.counts[id];
+            else p.counts[id] = 1;
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSidebar();
+            renderSummary();
+            renderItems();
+        }
+
+        function toggleDone(id) {
+            const p = getCurrent();
+            if (p.done[id]) delete p.done[id];
+            else p.done[id] = true;
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSidebar();
+            renderSummary();
+            renderItems();
+        }
+
+        function changeOwned(delta) {
+            const p = getCurrent();
+            p.owned = Math.max(0, (p.owned || 0) + delta);
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSummary();
+        }
+
+        function setOwned(val) {
+            const p = getCurrent();
+            const n = parseInt(val, 10);
+            p.owned = isNaN(n) || n < 0 ? 0 : Math.min(99999, n);
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderSummary();
+        }
+
+        function selectAllOnce() {
+            const p = getCurrent();
+            REWARD_CATALOG.forEach(item => {
+                if (!p.counts[item.id]) p.counts[item.id] = 1;
+            });
+            p.lastUpdate = new Date().toISOString();
+            saveAllData();
+            renderAll();
+        }
+
+        function resetCurrentPerson() {
+            const p = getCurrent();
+            p.counts = {};
+            p.done = {};
+            p.owned = 0;
+            p.lastUpdate = null;
+            saveAllData();
+            renderAll();
+        }
+
+        function setTheme(mode) {
+            Object.values(THEME_CLASSES).forEach(cls => { if (cls) document.body.classList.remove(cls); });
+            if (THEME_CLASSES[mode]) document.body.classList.add(THEME_CLASSES[mode]);
+            document.querySelectorAll(".theme-dropdown-item").forEach(item => {
+                item.classList.toggle("active", item.dataset.theme === mode);
+            });
+            document.getElementById("currentThemeLabel").textContent = THEME_LABELS[mode] || "光明";
+            localStorage.setItem("ffxiv_mogmog_theme", mode);
+        }
+        function selectTheme(mode) { setTheme(mode); closeThemeDropdown(); }
+        function toggleThemeDropdown(e) {
+            e.stopPropagation();
+            const d = document.getElementById("themeDropdown");
+            const b = document.getElementById("themeTrigger");
+            if (d.classList.contains("show")) closeThemeDropdown();
+            else { d.classList.add("show"); b.classList.add("open"); }
+        }
+        function closeThemeDropdown() {
+            document.getElementById("themeDropdown").classList.remove("show");
+            document.getElementById("themeTrigger").classList.remove("open");
+        }
+        document.addEventListener("click", e => {
+            const wrap = document.querySelector(".theme-trigger-wrap");
+            if (wrap && !wrap.contains(e.target)) closeThemeDropdown();
+        });
+
+        function setFontSize(scale) {
+            document.documentElement.style.setProperty("--font-scale", scale);
+            document.body.classList.toggle("lg-font", scale >= 1.3 && scale < 2);
+            document.body.classList.toggle("xl-font", scale >= 2);
+            document.querySelectorAll(".font-btn").forEach(btn => {
+                btn.classList.toggle("active", parseFloat(btn.dataset.scale) === scale);
+            });
+            localStorage.setItem("ffxiv_mogmog_font", scale);
+        }
+
+        function openHelp() {
+            const win = document.getElementById("helpWindow");
+            win.classList.add("show");
+            win.style.left = "50%";
+            win.style.top = "80px";
+            win.style.transform = "translateX(-50%)";
+        }
+        function closeHelp() {
+            document.getElementById("helpWindow").classList.remove("show");
+        }
+
+        (function enableHelpDrag() {
+            const win = document.getElementById("helpWindow");
+            const bar = document.getElementById("helpDragBar");
+            let dragging = false, ox = 0, oy = 0;
+            bar.addEventListener("mousedown", e => {
+                dragging = true;
+                const rect = win.getBoundingClientRect();
+                ox = e.clientX - rect.left;
+                oy = e.clientY - rect.top;
+                win.style.transform = "none";
+                win.style.left = rect.left + "px";
+                win.style.top = rect.top + "px";
+            });
+            document.addEventListener("mousemove", e => {
+                if (!dragging) return;
+                win.style.left = (e.clientX - ox) + "px";
+                win.style.top = (e.clientY - oy) + "px";
+            });
+            document.addEventListener("mouseup", () => dragging = false);
+            bar.addEventListener("touchstart", e => {
+                dragging = true;
+                const t = e.touches[0];
+                const rect = win.getBoundingClientRect();
+                ox = t.clientX - rect.left;
+                oy = t.clientY - rect.top;
+                win.style.transform = "none";
+                win.style.left = rect.left + "px";
+                win.style.top = rect.top + "px";
+            }, { passive: true });
+            document.addEventListener("touchmove", e => {
+                if (!dragging) return;
+                const t = e.touches[0];
+                win.style.left = (t.clientX - ox) + "px";
+                win.style.top = (t.clientY - oy) + "px";
+            }, { passive: true });
+            document.addEventListener("touchend", () => dragging = false);
+        })();
+
+        let lastIsMobile = window.innerWidth <= 760;
+        window.addEventListener("resize", () => {
+            const nowMobile = window.innerWidth <= 760;
+            if (nowMobile !== lastIsMobile) {
+                lastIsMobile = nowMobile;
+                renderItems();
+            }
+        });
+
+        (function init() {
+            loadAllData();
+            const sp = parseInt(localStorage.getItem("ffxiv_mogmog_cur_person"));
+            if (!isNaN(sp) && sp >= 0 && sp < PERSON_COUNT) currentPerson = sp;
+            const st = localStorage.getItem("ffxiv_mogmog_theme");
+            if (st && THEME_LABELS[st]) setTheme(st); else setTheme("light");
+            const fs = parseFloat(localStorage.getItem("ffxiv_mogmog_font"));
+            if (fs && [0.9, 1, 1.35, 2.2].includes(fs)) setFontSize(fs);
+            renderAll();
+        })();
+    </script>
+</body>
+</html>
